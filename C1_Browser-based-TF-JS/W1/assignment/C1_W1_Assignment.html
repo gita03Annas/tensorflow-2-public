@@ -13,7 +13,10 @@
             const trainingData = tf.data.csv(trainingUrl, {
                 
                 // YOUR CODE HERE
-                
+                columnConfigs: {
+                    diagnosis: {
+                        isLabel: true
+                    }
             });
             
             // Convert the training data into arrays in the space below.
@@ -32,6 +35,10 @@
             const testingData = tf.data.csv(testingUrl, {
                 
                 // YOUR CODE HERE
+                columnConfigs: {
+                    diagnosis: {
+                        isLabel: true
+                    }
                 
             });
             
@@ -60,7 +67,10 @@
             const model = tf.sequential();
             
             // YOUR CODE HERE
-
+            model.add(tf.layers.dense({inputShape: [numOfFeatures], activation: "relu", units: 32}))
+            model.add(tf.layers.dense({activation: "relu", units: 64}));
+            model.add(tf.layers.dense({activation: "relu", units: 32}));
+            model.add(tf.layers.dense({activation: "sigmoid", units: 1}));
             
             
             // Compile the model using the binaryCrossentropy loss, 
